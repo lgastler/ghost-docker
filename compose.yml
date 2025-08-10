@@ -41,7 +41,7 @@ services:
       tinybird__tracker__datasource: analytics_events
       tinybird__stats__endpoint: ${TINYBIRD_API_URL:-https://api.tinybird.co}
     volumes:
-      - ${UPLOAD_LOCATION:-./data/ghost}:/var/lib/ghost/content
+      - ghost_data:/var/lib/ghost/content
     depends_on:
       db:
         condition: service_healthy
@@ -69,7 +69,7 @@ services:
       MYSQL_DATABASE: ghost
       MYSQL_MULTIPLE_DATABASES: activitypub
     volumes:
-      - ${MYSQL_DATA_LOCATION:-./data/mysql}:/var/lib/mysql
+      - db_data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
     healthcheck:
       test: mysqladmin ping -p$$MYSQL_ROOT_PASSWORD -h 127.0.0.1
@@ -90,7 +90,7 @@ services:
     environment:
       NODE_ENV: production
       PROXY_TARGET: ${TINYBIRD_API_URL:-https://api.tinybird.co}/v0/events
-      SALT_STORE_TYPE: ${SALT_STORE_TYPE:-file}
+      SALT_STORE_TYPE: file
       SALT_STORE_FILE_PATH: /data/salts.json
       TINYBIRD_TRACKER_TOKEN: ${TINYBIRD_TRACKER_TOKEN:-}
       LOG_LEVEL: debug
@@ -198,6 +198,8 @@ services:
     restart: no
 
 volumes:
+  ghost_data:
+  db_data:
   caddy_data:
   caddy_config:
   tinybird_files:
