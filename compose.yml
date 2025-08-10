@@ -104,7 +104,7 @@ services:
     expose:
       - "8080"
     volumes:
-      - ${UPLOAD_LOCATION:-./data/ghost}:/opt/activitypub/content
+      - ghost_data:/opt/activitypub/content
     environment:
       NODE_ENV: production
       PORT: 8080
