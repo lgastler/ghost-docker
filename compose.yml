@@ -22,12 +22,8 @@ services:
     expose:
       - "2368"
     labels:
-      - traefik.http.middlewares.add-my-header.headers.customrequestheaders.X-Weather=Sunny
-      - glasmomente.test=$COOLIFY_RESOURCE_UUID
-      - glasmomente.test-2=${COOLIFY_RESOURCE_UUID}
-      - traefik.http.middlewares.redir-ghost-well-known-${COOLIFY_RESOURCE_UUID}.redirectregex.regex=^https?://[^/]+/\\.ghost/activitypub/(.*)
-      - traefik.http.middlewares.redir-ghost-well-known-${COOLIFY_RESOURCE_UUID}.redirectregex.replacement=${ACTIVITYPUB_TARGET}/$1
-      - traefik.http.routers.https-0-${COOLIFY_RESOURCE_UUID}-ghost.middlewares=gzip,redir-ghost-${COOLIFY_RESOURCE_UUID}
+      - traefik.http.middlewares.redir-ghost-well-known.redirectregex.regex=^https?://[^/]+/\\.ghost/activitypub/(.*)
+      - traefik.http.middlewares.redir-ghost-well-known.redirectregex.replacement=${ACTIVITYPUB_TARGET}/$1
     environment:
       NODE_ENV: production
       url: https://${DOMAIN:?DOMAIN environment variable is required}
