@@ -4,9 +4,8 @@ services:
   caddy:
     image: caddy:2.10.0-alpine
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
+    expose:
+      - "80"
     environment:
       DOMAIN: ${DOMAIN:?DOMAIN environment variable is required}
       ADMIN_DOMAIN: ${ADMIN_DOMAIN:-}
