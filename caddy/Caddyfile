@@ -2,7 +2,7 @@
 	import snippets/Logging
 
 	# Traffic Analytics service
-	import snippets/TrafficAnalytics
+	# import snippets/TrafficAnalytics
 
 	# ActivityPub Service
 	import snippets/ActivityPub
@@ -16,7 +16,7 @@
 	encode gzip
 
 	# Optional: Add security headers
-	import snippets/SecurityHeaders
+	# import snippets/SecurityHeaders
 }
 
 # Separate admin domains
