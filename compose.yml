@@ -8,7 +8,6 @@ services:
       - "80"
     environment:
       DOMAIN: ${DOMAIN:?DOMAIN environment variable is required}
-      ADMIN_DOMAIN: ${ADMIN_DOMAIN:-}
       ACTIVITYPUB_TARGET: ${ACTIVITYPUB_TARGET:-https://ap.ghost.org}
     volumes:
       - ./caddy:/etc/caddy
@@ -31,11 +30,6 @@ services:
       database__connection__user: ${DATABASE_USER:-ghost}
       database__connection__password: ${DATABASE_PASSWORD:?DATABASE_PASSWORD environment variable is required}
       database__connection__database: ghost
-      tinybird__tracker__endpoint: https://${DOMAIN:?DOMAIN environment variable is required}/.ghost/analytics/api/v1/page_hit
-      tinybird__adminToken: ${TINYBIRD_ADMIN_TOKEN:-}
-      tinybird__workspaceId: ${TINYBIRD_WORKSPACE_ID:-}
-      tinybird__tracker__datasource: analytics_events
-      tinybird__stats__endpoint: ${TINYBIRD_API_URL:-https://api.tinybird.co}
     volumes:
       - ghost_data:/var/lib/ghost/content
     depends_on:
